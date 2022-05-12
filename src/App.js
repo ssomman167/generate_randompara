@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react"
+import data from "./data"
+import "./index.css"
+import Show from "./Show"
 
-function App() {
+const App = () => {
+ const [index,setIndex]=useState(0)
+ const [show,setShow]=useState(false)
+    const getval=(event)=>{
+        setIndex(event.target.value)
+        setShow(false)
+
+    }
+
+    const showit=()=>{
+        setShow(true)
+    }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main">
+        <h1>Tired of lorem ipsum</h1>
+        <input className="input" placeholder="No of para" onChange={(event)=>{
+           setIndex(event.target.value)
+           setShow(false)
+        }}/>
+        
+        <button className="input" onClick={showit}>SUBMIT</button>
+
+  {
+      show?<Show data={data.slice(0,index)}  showit={showit}/>:""
+     
+  }
+
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
